@@ -78,3 +78,9 @@ git init
 git add .
 git commit -m "Week 1: Knowledge Ingestion Layer completed"
 ````
+
+## Week 3 Update
+
+- Integrated Gemini 1.5 Flash for low-latency responses
+- Implemented SSE-based real-time streaming
+- Added React UI with citation reference cards
