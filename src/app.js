@@ -1,18 +1,29 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+const connectDB = require("./config/db");
 
 const uploadRoutes = require("./routes/upload.routes");
 const searchRoutes = require("./routes/search.routes");
+const askRoutes = require("./routes/ask.routes");
 
-const app = express();
+const app = express(); // ✅ app MUST be created first
+
 app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"));
+// DB
+connectDB();
 
+// Routes
 app.use("/upload", uploadRoutes);
 app.use("/search", searchRoutes);
+app.use("/ask", askRoutes);
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// Health check
+app.get("/", (req, res) => {
+  res.send("OpsMind AI Backend Running");
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
