@@ -14,7 +14,7 @@ app.use(express.json());
 connectDB();
 
 // Routes
-app.use("/upload", uploadRoutes);
+app.use("/api", uploadRoutes);
 app.use("/search", searchRoutes);
 app.use("/ask", askRoutes);
 

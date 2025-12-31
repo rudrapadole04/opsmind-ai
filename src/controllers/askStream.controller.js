@@ -1,4 +1,4 @@
-const generateStreamedAnswer = require("../services/geminiClient");
+const generateStreamedAnswer = require("../services/groqClient");
 const Embedding = require("../models/Embedding");
 const createEmbedding = require("../services/localEmbeddings");
 
@@ -55,6 +55,12 @@ ${context}
 Question:
 ${question}
 `;
+  console.log(
+    ranked.map((r) => ({
+      score: r.score,
+      preview: r.text.slice(0, 80),
+    }))
+  );
 
   await generateStreamedAnswer(prompt, (token) => {
     if (token) {

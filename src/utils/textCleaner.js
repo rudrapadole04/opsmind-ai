@@ -7,6 +7,8 @@ function cleanText(text) {
     .replace(/\\t/g, " ") // escaped tabs
     .replace(/\t/g, " ") // real tabs
     .replace(/\s+/g, " ") // extra spaces
+    .replace(/\.{5,}/g, "") // remove dots
+    .replace(/\s+/g, " ")
     .trim();
 }
 

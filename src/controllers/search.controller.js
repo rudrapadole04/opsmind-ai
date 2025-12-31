@@ -1,4 +1,4 @@
-const CONFIDENCE_THRESHOLD = 0.65;
+const CONFIDENCE_THRESHOLD = 0.55;
 const Embedding = require("../models/Embedding");
 const createEmbedding = require("../services/localEmbeddings");
 const generateAnswer = require("../services/answerGenerator");

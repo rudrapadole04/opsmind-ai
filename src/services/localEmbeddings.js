@@ -2,20 +2,20 @@ const { pipeline } = require("@xenova/transformers");
 
 let embedder;
 
-// Load once (important)
-async function loadModel() {
+async function getEmbedder() {
   if (!embedder) {
     embedder = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2");
   }
   return embedder;
 }
 
-const createEmbedding = async (text) => {
-  const model = await loadModel();
-  const output = await model(text, { pooling: "mean", normalize: true });
+module.exports = async function createEmbedding(text) {
+  // 🔒 HARD GUARD
+  if (typeof text !== "string") {
+    throw new Error(`Embedding input must be a string. Got: ${typeof text}`);
+  }
 
-  // output.data is a Float32Array
+  const model = await getEmbedder();
+  const output = await model(text, { pooling: "mean", normalize: true });
   return Array.from(output.data);
 };
-
-module.exports = createEmbedding;
